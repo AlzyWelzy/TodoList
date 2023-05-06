@@ -14,7 +14,7 @@ class TodoList:
 
     def print(self):
         for i, todo in enumerate(self.todos):
-            print(f"{i}: {todo}")
+            print(f"{i+1}: {todo}")
 
     def save(self):
         path = Path("todos.txt")
@@ -40,7 +40,7 @@ class TodoList:
             elif command == "remove":
                 self.print()
                 index = int(input("What index would you like to remove? "))
-                self.remove(self.todos[index])
+                self.remove(self.todos[index-1])
             elif command == "print":
                 self.print()
             elif command == "save":
