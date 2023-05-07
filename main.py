@@ -34,7 +34,7 @@ class TodoList:
             input_text = "What would you like to do? Here are your options:"
             print(input_text)
             # print("Here are your options:")
-            for x,y in enumerate(self.commands):
+            for x, y in enumerate(self.commands):
                 print(f"{x + 1}: {y}")
             command = input(">>> ")
             if command == "quit":
