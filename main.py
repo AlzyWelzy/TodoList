@@ -5,6 +5,7 @@ import sys
 class TodoList:
     def __init__(self):
         self.todos = []
+        self.commands = ["add", "remove", "print", "save", "load", "quit"]
 
     def add(self, todo):
         self.todos.append(todo)
@@ -30,7 +31,12 @@ class TodoList:
 
     def run(self):
         while True:
-            command = input("What would you like to do? (add/remove/print/save/load/quit) ")
+            input_text = "What would you like to do? Here are your options:"
+            print(input_text)
+            # print("Here are your options:")
+            for x,y in enumerate(self.commands):
+                print(f"{x + 1}: {y}")
+            command = input(">>> ")
             if command == "quit":
                 print("Goodbye!")
                 sys.exit(0)
