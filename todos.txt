@@ -1,2 +1,4 @@
-print
-ehe te nandayo
+clean
+clean more
+clean
+clean more even more

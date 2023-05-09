@@ -11,7 +11,7 @@ class TodoList:
         self.todos.append(todo)
 
     def remove(self, todo):
-        self.todos.remove(todo)
+        del self.todos[todo]
 
     def print(self):
         for i, todo in enumerate(self.todos):
@@ -19,15 +19,17 @@ class TodoList:
 
     def save(self):
         path = Path("todos.txt")
-        with open(path, "w") as f:
-            for todo in self.todos:
-                f.write(todo + "\n")
+        write_file = open(path, "w")
+        for todo in self.todos:
+            write_file.write(todo + "\n")
+        write_file.close()
 
     def load(self):
         path = Path("todos.txt")
-        with open(path, "r") as f:
-            for line in f:
-                self.todos.append(line.strip())
+        read_file = open(path, "r")
+        for line in read_file:
+            self.todos.append(line.strip())
+        read_file.close()
 
     def run(self):
         while True:
@@ -46,7 +48,7 @@ class TodoList:
             elif command == "remove":
                 self.print()
                 index = int(input("What index would you like to remove? "))
-                self.remove(self.todos[index - 1])
+                self.remove(index - 1)
             elif command == "print":
                 self.print()
             elif command == "save":
@@ -64,4 +66,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
