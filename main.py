@@ -1,7 +1,5 @@
 from pathlib import Path
 import sys
-
-
 class TodoList:
     def __init__(self):
         self.todos = []
