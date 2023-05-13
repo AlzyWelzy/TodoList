@@ -23,8 +23,8 @@ class Coin:
             print("No tosses yet!")
         heads_percentage = self.sides["heads"] / total * 100
         tails_percentage = self.sides["tails"] / total * 100
-        print(f"Heads: {heads_percentage:.2f}%")
-        print(f"Tails: {tails_percentage:.2f}%")
+        print(f"Heads: {heads_percentage:.2f}% with {self.sides['heads']} tosses")
+        print(f"Tails: {tails_percentage:.2f}% with {self.sides['tails']} tosses")
 
     def save(self):
         with open("coin.json", "w") as file:
