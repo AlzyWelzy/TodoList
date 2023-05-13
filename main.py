@@ -38,7 +38,7 @@ class TodoList:
             # print("Here are your options:")
             for x, y in enumerate(self.commands):
                 print(f"{x + 1}: {y}")
-            command = input(">>> ")
+            command = input(">>> ").strip().lower()
             if command == "quit":
                 print("Goodbye!")
                 sys.exit(0)
