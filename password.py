@@ -46,3 +46,21 @@ while True:
         )
         strength = {}
         continue
+
+# What is 1001 Arabic Nights?
+# A collection of Middle Eastern folk tales compiled in Arabic during the Islamic Golden Age.
+# It is often known in English as the Arabian Nights, from the first English language edition (1706), which rendered the title as The Arabian Nights' Entertainment.
+# The work was collected over many centuries by various authors, translators, and scholars across West, Central, and South Asia and North Africa.
+# The tales themselves trace their roots back to ancient and medieval Arabic, Persian, Mesopotamian, Indian, Jewish, and Egyptian folklore and literature.
+# In particular, many tales were originally folk stories from the Caliphate era, while others, especially the frame story, are most probably drawn from the Pahlavi Persian work Hazār Afsān (Persian: هزار افسان‎, lit. A Thousand Tales) which in turn relied partly on Indian elements.
+# What is the frame story?
+# The frame story of Scheherazade telling stories over a thousand nights to save her life from the Persian king Shahryar and the Persian queen Scheherazade.
+# What is the frame story of the frame story?
+# The frame story of the frame story is the Persian king Shahryar and the Persian queen Scheherazade.
+# What kind of king is Shahryar?
+# Shahryar is a Persian king who is betrayed by his wife. He then marries a new wife every day and kills her the next morning.
+# What kind of queen is Scheherazade?
+# Scheherazade is a Persian queen who tells stories to the king every night to save her life.
+# what kind of stories does Scheherazade tell?
+# Scheherazade tells stories about the Middle East.
+# All of the stories are about the Middle East and is that true?
