@@ -1,6 +1,4 @@
-import random
 import string  # for string constants
-import sys  # for sys.exit()
 
 
 class PWD_Strength_Checker:
