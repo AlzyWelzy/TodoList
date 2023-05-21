@@ -5,8 +5,14 @@ cur_year = int(time.strftime("%Y"))
 
 def calculate_age(birth_year):
     age = cur_year - birth_year
-    return f"You are {age} years old."
+    return age
 
 
 birth_year = int(input("What year were you born? "))
-print(calculate_age(birth_year=birth_year))
+years_old = calculate_age(birth_year)
+print(f"You are {years_old} years old.")
+
+if years_old > 120:
+    print("You are the oldest person alive! I have ever seen!")
+else:
+    print("You are not the oldest person alive! I have ever seen!")
