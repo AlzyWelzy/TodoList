@@ -1,3 +1,6 @@
+"""Created a speed functon that takes in a list of two numbers, distance and time, and returns the speed."""
+
+
 def speed(distance, time):
     return distance / time
 
