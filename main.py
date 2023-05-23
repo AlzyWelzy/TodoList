@@ -2,6 +2,8 @@ from pathlib import Path
 import sys
 import time
 
+FILEPATH = Path("todos.txt")
+
 
 class TodoList:
     def __init__(self):
@@ -19,15 +21,13 @@ class TodoList:
             print(f"{i + 1}: {todo}")
 
     def save(self):
-        path = Path("todos.txt")
-        write_file = open(path, "w")
+        write_file = open(FILEPATH, "w")
         for todo in self.todos:
             write_file.write(todo + "\n")
         write_file.close()
 
     def load(self):
-        path = Path("todos.txt")
-        read_file = open(path, "r")
+        read_file = open(FILEPATH, "r")
         for line in read_file:
             self.todos.append(line.strip())
         read_file.close()
