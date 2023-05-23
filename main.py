@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import time
 
 
 class TodoList:
@@ -43,6 +44,8 @@ class TodoList:
                 sys.exit(0)
             elif command == "add":
                 todo = input("What would you like to add? ")
+                todo_time = time.strftime("%Y-%m-%d %H:%M:%S")
+                todo = f"{todo} - {todo_time}"
                 self.add(todo)
             elif command == "remove":
                 self.print()
