@@ -3,11 +3,11 @@ import PySimpleGUI as sg
 files_label = sg.Text("Select files to compress:")
 # file_location = sg.InputText(tooltip="Enter file location")
 file_location = sg.Input(tooltip="Enter file location")
-files_button = sg.FilesBrowse("Choose")
+files_button = sg.FilesBrowse("Choose", key="files")
 
 destination_label = sg.Text("Select destination folder:")
 destination_location = sg.Input(tooltip="Enter destination folder")
-destination_button = sg.FolderBrowse("Choose")
+destination_button = sg.FolderBrowse("Choose", key="folder")
 
 compress_button = sg.Button("Compress")
 
@@ -29,5 +29,10 @@ window = sg.Window(
     ],
 )
 
-window.read()
+while True:
+    event, values = window.read()
+    print(event, values)
+    filepaths = values.get("Choose").split(";")
+    folder = values.get("Choose0")
+
 window.close()
