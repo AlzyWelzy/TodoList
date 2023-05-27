@@ -51,5 +51,8 @@ while True:
             functions.write_todos(todos)
             window["todos"].update(values=todos)
 
+        case "todos":
+            window["todo"].update(value=values.get("todos")[0])
+
 
 window.close()
