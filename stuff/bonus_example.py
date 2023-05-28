@@ -32,7 +32,7 @@ window = sg.Window(
 while True:
     event, values = window.read()
     print(event, values)
-    filepaths = values.get("Choose").split(";")
-    folder = values.get("Choose0")
+    filepaths = values.get("files").split(";")
+    folder = values.get("folder")
 
 window.close()
