@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from zip_creator import make_archive
 
 files_label = sg.Text("Select files to compress:")
 # file_location = sg.InputText(tooltip="Enter file location")
@@ -19,20 +20,18 @@ title = "File Compressor"
 window = sg.Window(
     title=title,
     layout=[
-        [
-            location_layout,
-            destination_layout,
-        ],
-        [
-            compress_button,
-        ],
+        location_layout,
+        destination_layout,
+        [compress_button],
     ],
 )
 
 while True:
     event, values = window.read()
     print(event, values)
-    filepaths = values.get("files").split(";")
-    folder = values.get("folder")
+    print(type(values))
+    filepaths = values["files"].split(";")
+    folder = values["folder"]
+    make_archive(filepaths=filepaths, dest_dir=folder)
 
 window.close()
