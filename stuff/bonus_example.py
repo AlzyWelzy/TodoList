@@ -11,9 +11,12 @@ destination_location = sg.Input(tooltip="Enter destination folder")
 destination_button = sg.FolderBrowse("Choose", key="folder")
 
 compress_button = sg.Button("Compress")
+# output_label = sg.Text("Output: ", key="output")
+output_label = sg.Text(key="output")
 
 location_layout = [files_label, file_location, files_button]
 destination_layout = [destination_label, destination_location, destination_button]
+comp_output_layout = [compress_button, output_label]
 
 title = "File Compressor"
 
@@ -22,7 +25,7 @@ window = sg.Window(
     layout=[
         location_layout,
         destination_layout,
-        [compress_button],
+        comp_output_layout,
     ],
 )
 
@@ -33,5 +36,6 @@ while True:
     filepaths = values["files"].split(";")
     folder = values["folder"]
     make_archive(filepaths=filepaths, dest_dir=folder)
+    window["output"].update("Done!")
 
 window.close()
