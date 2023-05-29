@@ -15,10 +15,15 @@ list_box = sg.Listbox(
 )
 
 edit_button = sg.Button("Edit")
+complete_button = sg.Button("Complete")
 
 window = sg.Window(
     "My To-Do App",
-    layout=[[label], [input_box, add_button], [list_box, edit_button]],
+    layout=[
+        [label],
+        [input_box, add_button],
+        [list_box, edit_button, complete_button],
+    ],
     font=("Helvetica", 20),
 )
 
