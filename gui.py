@@ -47,24 +47,41 @@ while True:
             window["todos"].update(values=todos)
 
         case "Edit":
-            todos = functions.get_todos()
-            selected_todo = values.get("todos")[0]
-            new_todo = sg.popup_get_text(
-                "Edit to-do item",
-                default_text=selected_todo,
-            )
-            todos.remove(selected_todo)
-            todos.append(f"{new_todo}\n")
-            functions.write_todos(todos)
-            window["todos"].update(values=todos)
+            try:
+                todos = functions.get_todos()
+                selected_todo = values.get("todos")[0]
+                new_todo = sg.popup_get_text(
+                    "Edit to-do item",
+                    default_text=selected_todo,
+                )
+                todos.remove(selected_todo)
+                todos.append(f"{new_todo}\n")
+                functions.write_todos(todos)
+                window["todos"].update(values=todos)
+            except IndexError:
+                sg.popup("Please select a to-do item to edit", font=("Helvetica", 20))
+
+            else:
+                print(f"Edited {selected_todo}")
+            finally:
+                window["todo"].update(value="")
 
         case "Complete":
-            todo_to_complete = values.get("todos")[0]
-            todos = functions.get_todos()
-            todos.remove(todo_to_complete)
-            functions.write_todos(todos)
-            window["todos"].update(values=todos)
-            window["todo"].update(value="")
+            try:
+                todo_to_complete = values.get("todos")[0]
+                todos = functions.get_todos()
+                todos.remove(todo_to_complete)
+                functions.write_todos(todos)
+                window["todos"].update(values=todos)
+                window["todo"].update(value="")
+            except IndexError:
+                sg.popup(
+                    "Please select a to-do item to complete", font=("Helvetica", 20)
+                )
+            else:
+                print(f"Completed {todo_to_complete}")
+            finally:
+                window["todo"].update(value="")
 
         case "Exit":
             break
