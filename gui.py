@@ -2,7 +2,10 @@ import functions
 import PySimpleGUI as sg
 import time
 
+sg.theme("DarkAmber")
 
+# now = time.strftime("%b %d, %Y %H:%M:%S")
+clock = sg.Text("", key="clock")
 label = sg.Text("Enter a to-do item")
 input_box = sg.InputText(tooltip="Enter a task", key="todo")
 add_button = sg.Button("Add")
@@ -21,6 +24,7 @@ exit_button = sg.Button("Exit")
 window = sg.Window(
     "My To-Do App",
     layout=[
+        [clock],
         [label],
         [input_box, add_button],
         [list_box, edit_button, complete_button],
@@ -30,7 +34,9 @@ window = sg.Window(
 )
 
 while True:
-    event, values = window.read()
+    now = time.strftime("%b %d, %Y %H:%M:%S")
+    event, values = window.read(timeout=10)
+    window["clock"].update(value=now)
     print(event)
     print(values)
 
