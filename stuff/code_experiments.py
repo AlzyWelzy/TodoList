@@ -10,7 +10,11 @@ label = sg.Text("Enter a to-do item")
 input_box = sg.InputText(tooltip="Enter a task", key="todo")
 # add_button = sg.Button("Add")
 add_button = sg.Button(
-    image_source="plus.png", key="Add", tooltip="Add a task", size=10
+    image_source="plus.png",
+    key="Add",
+    tooltip="Add a task",
+    size=10,
+    mouseover_colors="red",
 )
 
 list_box = sg.Listbox(
