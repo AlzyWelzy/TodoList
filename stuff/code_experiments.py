@@ -21,7 +21,7 @@ list_box = sg.Listbox(
     values=functions.get_todos(),
     key="todos",
     enable_events=True,
-    size=([45, 10]),
+    size=[45, 10],
 )
 
 edit_button = sg.Button("Edit")
