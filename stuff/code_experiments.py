@@ -36,6 +36,7 @@ window = sg.Window(
         [input_box, add_button],
         [list_box, edit_button, complete_button],
         [exit_button],
+        [exit_button],
     ],
     font=("Helvetica", 20),
 )
