@@ -78,7 +78,6 @@ while True:
                 print(f"Edited {selected_todo}")
             finally:
                 window["todo"].update(value="")
-                window["todo"].update(value="")
 
         case "Complete":
             try:
