@@ -82,6 +82,7 @@ while True:
         case "Complete":
             try:
                 todo_to_complete = values.get("todos")[0]
+                todo_to_complete = values.get("todos")[0]
                 todos = functions.get_todos()
                 todos.remove(todo_to_complete)
                 functions.write_todos(todos)
