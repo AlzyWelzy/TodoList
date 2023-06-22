@@ -95,6 +95,7 @@ while True:
                 print(f"Completed {todo_to_complete}")
             finally:
                 window["todo"].update(value="")
+                window["todo"].update(value="")
 
         case "Exit":
             break
