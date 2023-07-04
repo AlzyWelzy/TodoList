@@ -18,7 +18,6 @@ class TodoList:
 
     def print(self):
         for i, todo in enumerate(self.todos):
-        for i, todo in enumerate(self.todos):
             print(f"{i + 1}: {todo}")
 
     def save(self):
