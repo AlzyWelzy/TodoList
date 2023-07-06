@@ -35,7 +35,6 @@ class TodoList:
     def run(self):
         while True:
             input_text = "What would you like to do? Here are your options:"
-            input_text = "What would you like to do? Here are your options:"
             print(input_text)
             for x, y in enumerate(self.commands):
                 print(f"{x + 1}: {y}")
