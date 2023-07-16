@@ -9,7 +9,6 @@ clock = sg.Text("", key="clock")
 label = sg.Text("Enter a to-do item")
 input_box = sg.InputText(tooltip="Enter a task", key="todo")
 add_button = sg.Button("Add")
-add_button = sg.Button("Add")
 
 list_box = sg.Listbox(
     values=functions.get_todos(),
