@@ -15,7 +15,6 @@ class TodoList:
 
     def remove(self, todo):
         del self.todos[todo]
-        del self.todos[todo]
 
     def print(self):
         for i, todo in enumerate(self.todos):
