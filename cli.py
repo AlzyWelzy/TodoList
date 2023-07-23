@@ -21,7 +21,6 @@ class TodoList:
             print(f"{i + 1}: {todo}")
 
     def save(self):
-    def save(self):
         write_file = open(FILEPATH, "w")
         for todo in self.todos:
             write_file.write(todo + "\n")
