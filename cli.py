@@ -13,6 +13,7 @@ class TodoList:
     def add(self, todo):
         self.todos.append(todo)
 
+
     def remove(self, todo):
         del self.todos[todo]
 
