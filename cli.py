@@ -14,7 +14,6 @@ class TodoList:
         self.todos.append(todo)
 
     def remove(self, todo):
-    def remove(self, todo):
         del self.todos[todo]
 
     def print(self):
