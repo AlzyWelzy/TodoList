@@ -11,6 +11,7 @@ class TodoList:
         self.commands = ["add", "remove", "print", "save", "load", "quit"]
 
     def add(self, todo):
+    def add(self, todo):
         self.todos.append(todo)
 
     def remove(self, todo):
