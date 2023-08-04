@@ -7,8 +7,8 @@ FILEPATH = Path("todos.txt")
 
 class TodoList:
     def __init__(self):
+        self.todos = []
         self.commands = ["add", "remove", "print", "save", "load", "quit"]
-        self.todos = []zzz
 
     def add(self, todo):
         self.todos.append(todo)
