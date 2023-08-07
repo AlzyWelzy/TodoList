@@ -10,7 +10,6 @@ class todolist:
     def __init__(self):
         self.todos = []
         self.commands = ["add", "remove", "list", "help"]
-        self.commands = ["add", "remove", "list", "help"]
 
 
     # def login(self):
