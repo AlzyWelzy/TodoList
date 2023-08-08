@@ -1,9 +1,8 @@
-import json
 import pathlib
 import sys
 import time
 
-TODOS_PATH = pathlib.Path.home() / ".todos.json"
+FILEPATH=pathlib.Path("todos.txt")1
 
 
 class todolist:
@@ -17,17 +16,6 @@ class todolist:
     #     print("Please login to continue")
     #     username = input("Username: ")
     #     password = input("Password: ")
-
-
-    def create_user(self):
-        print("Welcome to the todo list!")
-        print("Please create a new user")
-        username = input("Username: ")
-        password = input("Password: ")
-
-        with open("users.json", "a") as f:
-            json.dump({"username": username, "password": password}, f)
-
 
     def save(self):
         with open(, "w") as f:
