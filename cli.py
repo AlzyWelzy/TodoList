@@ -1,6 +1,5 @@
 import pathlib
 import sys
-import time
 
 FILEPATH = pathlib.Path("todos.txt")
 
@@ -8,76 +7,68 @@ FILEPATH = pathlib.Path("todos.txt")
 class TodoList:
     def __init__(self):
         self.todos = []
-        # self.commands = [
-        #     "add",
-        #     "remove",
-        #     "print",
-        #     "load",
-        #     "save",
-        #     "help",
-        #     "quit",
-        # ]
 
         self.commands = {
-            "add": "add a todo",
-            "remove": "remove a todo",
-            "print": "print all todos",
-            "load": "loads all todos from file",
-            "save": "saves all todos to file",
-            "quit": "quit the program without saving",
+            "add": ("add a todo", self.add),
+            "remove": ("remove a todo", self.remove),
+            "print": ("print all todos", self.print),
+            "load": ("loads all todos from file", self.load),
+            "save": ("saves all todos to file", self.save),
+            "quit": ("quit the program without saving", self.quit),
         }
 
     def add(self, todo):
-        print("adding todo")
+        """Add a new todo."""
+        print("Adding todo")
         self.todos.append(todo)
 
     def remove(self, todo):
-        print("removing todo")
-        del self.todos[todo]
+        """Remove a todo by index."""
+        print("Removing todo")
+        try:
+            index = int(todo) - 1
+            self.todos.pop(index)
+        except (ValueError, IndexError):
+            print("Invalid index")
 
     def print(self):
-        print("printing todo")
-        for i in enumerate(self.todos):
+        """Print all todos."""
+        print("Printing todos")
+        for i, todo in enumerate(self.todos):
             print(f"{i + 1}: {todo}")
 
     def save(self):
-        print("saving todo")
+        """Save todos to a file."""
+        print("Saving todos")
         with open(FILEPATH, "w") as write_file:
             for todo in self.todos:
                 write_file.write(todo + "\n")
 
     def load(self):
-        print("loading todo")
-        with open(FILEPATH, "r") as read_file:
-            for line in read_file:
-                self.todos.append(line.strip())
+        """Load todos from a file."""
+        print("Loading todos")
+        try:
+            with open(FILEPATH, "r") as read_file:
+                self.todos = [line.strip() for line in read_file]
+        except FileNotFoundError:
+            print("File not found")
 
     def quit(self):
-        print("quitting todo")
+        """Quit the program."""
+        print("Quitting todo")
         sys.exit(0)
 
     def run(self):
+        print("Welcome to the Todo List App!")
         while True:
-            input_text = "What would you link to do? Here are your options:"
-            print(input_text)
-            for x, y in self.commands.items():
-                print(f"{x}: {y}")
-            command = input(">>> ").strip().lower()
-            if command == "add":
-                todo = input("What would you like to add? ")
-                self.add(todo)
-            elif command == "remove":
-                todo = input("What index would you like to remove? ")
-                self.remove(todo - 1)
-            elif command == "print":
-                self.print()
-            elif command == "load":
-                self.load()
-            elif command == "save":
-                self.save()
-            elif command == "quit":
-                print("Goodbye!")
-                self.quit()
+            print("What would you like to do? Here are your options:")
+            for command, (description, _) in self.commands.items():
+                print(f"{command}: {description}")
+            choice = input(">>> ").strip().lower()
+            if choice in self.commands:
+                _, func = self.commands[choice]
+                arg = input(f"{func.__name__}: ")
+                func(arg)
             else:
                 print("Invalid command")
 
