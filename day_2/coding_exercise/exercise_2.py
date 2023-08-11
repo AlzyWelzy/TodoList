@@ -1,4 +1,3 @@
-name = input("What's your name? ").title()
-
 while True:
+    name = input("What's your name? ").title()
     print(name)
