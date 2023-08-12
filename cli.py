@@ -20,6 +20,7 @@ class TodoList:
     def add(self, todo):
         """Add a new todo."""
         print("Adding todo")
+        print("Adding todo")
         self.todos.append(todo)
 
     def remove(self, todo):
