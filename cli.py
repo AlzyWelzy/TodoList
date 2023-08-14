@@ -51,6 +51,7 @@ class TodoList:
             with open(FILEPATH, "r") as read_file:
                 self.todos = [line.strip() for line in read_file]
         except FileNotFoundError:
+        except FileNotFoundError:
             print("File not found")
 
     def quit(self):
