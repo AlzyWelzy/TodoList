@@ -61,7 +61,6 @@ class TodoList:
     def run(self):
         print("Welcome to the Todo List App!")
         while True:
-        while True:
             print("What would you like to do? Here are your options:")
             for command, (description, _) in self.commands.items():
                 print(f"{command}: {description}")
