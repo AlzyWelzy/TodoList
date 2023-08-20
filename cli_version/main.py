@@ -11,6 +11,7 @@ class TodoList:
 
         self.commands = {
             "add": ("add a task", self.add),
+            "update": ("update a task", self.update),
             "list": ("display tasks", self.list),
             "complete": ("complete a task", self.complete),
             "delete": ("delete a task", self.delete),
@@ -61,6 +62,25 @@ class TodoList:
         for _, task in enumerate(self.tasks.values()):
             task = f"{_+1}. [{task['priority']}] {task['title']} (Due: {task['due_date']}, Category: {task['category']}, Status: {task['status']})"
             print(task)
+
+    def update(self):
+        """Update a task by title."""
+        print("Updating task")
+        title = input("Enter task title: ")
+        try:
+            task = self.tasks[title]
+        except KeyError:
+            print("Invalid title")
+            return
+
+        print("Current task:")
+        task = f"[{task['priority']}] {task['title']} (Due: {task['due_date']}, Category: {task['category']}, Status: {task['status']})"
+        print(task)
+
+        task["priority"] = self.get_valid_priority_input("Enter priority (L/M/H): ")
+        task["due_date"] = self.get_valid_date_input("Enter due date (YYYY-MM-DD): ")
+        task["category"] = input("Enter category: ")
+        print("Task updated")
 
     def complete(self):
         """Complete a task by title."""
