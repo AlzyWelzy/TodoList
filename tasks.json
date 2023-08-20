@@ -3,9 +3,8 @@
     "title": "Get an internship",
     "description": "get a life",
     "priority": "H",
-    "due_date": "2023-08-23",
+    "due_date": "2023-08-20",
     "category": "personal",
-    "status": "incomplete",
-    "scheduled": "Y"
+    "status": "incomplete"
   }
 }

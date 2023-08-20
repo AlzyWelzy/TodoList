@@ -34,13 +34,13 @@ class TodoList:
         self.load()
 
         # Start a seperate thread to run the scheduled tasks
-        self.schedule_thread = threading.Thread(target=self.remind)
+        self.schedule_thread = threading.Thread(target=self.run_schedule)
         self.schedule_thread.daemon = True
         self.schedule_thread.start()
 
         # Schedule the daily reminder
         # Inside the __init__ method
-        schedule.every().day.at("11:20").do(self.remind_wrapper)
+        schedule.every().day.at("10:00").do(self.remind_wrapper)
 
     def get_valid_date_input(self, prompt):
         while True:
@@ -73,31 +73,33 @@ class TodoList:
             title=title,
             message=message,
             app_name="Task Manager",
-            timeout=5,
+            timeout=10,
         )
 
-    def remind(self, scheduled, due_date):
-        if scheduled == "Y":
-            today = datetime.today().date()
-            task_due_date = datetime.strptime(due_date, "%Y-%m-%d").date()
+    def remind(self, due_date):
+        today = datetime.today().date()
 
-            if task_due_date == today:
-                self.notify(
-                    "Task Due Today", f"Task with due date {due_date} is due today."
-                )
-            elif task_due_date == today + timedelta(days=1):
-                self.notify(
-                    "Task Due Tomorrow",
-                    f"Task with due date {due_date} is due tomorrow.",
-                )
+        for task in self.tasks.values():
+            if task["status"] == "incomplete":
+                task_due_date = datetime.strptime(task["due_date"], "%Y-%m-%d").date()
+
+                if task_due_date == today:
+                    self.notify(
+                        "Task Due Today", f"Task with due date {due_date} is due today."
+                    )
+
+                elif task_due_date == today + timedelta(days=1):
+                    self.notify(
+                        "Task Due Tomorrow",
+                        f"Task with due date {due_date} is due tomorrow.",
+                    )
 
     def remind_wrapper(self):
         for task in self.tasks.values():
-            if task["scheduled"] == "Y":
-                self.remind(task["scheduled"], task["due_date"])
+            self.remind(task["due_date"])
 
     def format_task_line(self, index, task):
-        return "{:<5} {:<10} {:<20} {:<20} {:<15} {:<15} {:<15} {:<15}".format(
+        return "{:<5} {:<10} {:<20} {:<20} {:<15} {:<15} {:<15}".format(
             index,
             task["priority"],
             task["title"],
@@ -105,13 +107,12 @@ class TodoList:
             task["due_date"],
             task["category"],
             task["status"],
-            task["scheduled"],
         )
 
     def display_tasks(self, tasks):
         """Display tasks in a formatted table."""
         print(
-            "{:<5} {:<10} {:<20} {:<20} {:<15} {:<15} {:<15} {:<15}".format(
+            "{:<5} {:<10} {:<20} {:<20} {:<15} {:<15} {:<15}".format(
                 "No.",
                 "Priority",
                 "Title",
@@ -119,7 +120,6 @@ class TodoList:
                 "Due Date",
                 "Category",
                 "Status",
-                "Scheduled",
             )
         )
         print("-" * 125)
@@ -127,6 +127,11 @@ class TodoList:
         for index, task in enumerate(tasks, start=1):
             task_line = self.format_task_line(index, task)
             print(task_line)
+
+    def run_schedule(self):
+        while True:
+            schedule.run_pending()
+            threading.Event().wait(1)
 
     def add(self):
         """Add a new task."""
@@ -138,16 +143,9 @@ class TodoList:
         task["due_date"] = self.get_valid_date_input("Enter due date (YYYY-MM-DD): ")
         task["category"] = input("Enter category: ")
         task["status"] = "incomplete"
-        task["scheduled"] = self.get_valid_scheduled_input(
-            "Schedule task? (Y/N): ",
-            ["Y", "N"],
-        )
 
         self.tasks[task["title"]] = task
-        if task["scheduled"] == "Y":
-            schedule.every().day.at("10:00").do(
-                self.remind, task["scheduled"], task["due_date"]
-            )
+
         print("Task added")
 
     def list(self):
