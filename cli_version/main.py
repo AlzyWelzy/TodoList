@@ -44,6 +44,29 @@ class TodoList:
             else:
                 print("Invalid priority")
 
+    def format_task_line(index, task):
+        return "{:<5} {:<10} {:<20} {:<15} {:<15} {:<15}".format(
+            index,
+            task["priority"],
+            task["title"],
+            task["due_date"],
+            task["category"],
+            task["status"],
+        )
+
+    def display_tasks(self, tasks):
+        """Display tasks in a formatted table."""
+        print(
+            "{:<5} {:<10} {:<20} {:<15} {:<15} {:<15}".format(
+                "No.", "Priority", "Title", "Due Date", "Category", "Status"
+            )
+        )
+        print("-" * 80)
+
+        for index, task in enumerate(tasks, start=1):
+            task_line = format_task_line(index, task)
+            print(task_line)
+
     def add(self):
         """Add a new task."""
         print("Adding task")
@@ -59,9 +82,7 @@ class TodoList:
     def list(self):
         """Print all tasks."""
         print("Displaying tasks")
-        for _, task in enumerate(self.tasks.values()):
-            task = f"{_+1}. [{task['priority']}] {task['title']} (Due: {task['due_date']}, Category: {task['category']}, Status: {task['status']})"
-            print(task)
+        self.display_tasks(self.tasks.values())
 
     def update(self):
         """Update a task by title."""
@@ -107,14 +128,12 @@ class TodoList:
         filter_value = input("Enter filter value (eg. [L/M/H] for priority filter): ")
 
         filtered_tasks = {}
-        for _, task in self.tasks.items():
+        for task in self.tasks.values():
             if task[filter_type] == filter_value:
-                filtered_tasks[task["title"]] = task
+                filtered_tasks.append(task)
 
         print("Displaying filtered tasks")
-        for _, task in filtered_tasks.items():
-            task = f"{task['priority']} {task['title']} (Due: {task['due_date']}, Category: {task['category']}, Status: {task['status']})"
-            print(task)
+        self.display_tasks(filtered_tasks)
 
     def sort(self):
         """Sort tasks by priority, due date, or status."""
@@ -138,9 +157,7 @@ class TodoList:
             print("Invalid sort type")
 
         print("Displaying sorted tasks")
-        for _, task in sorted_tasks:
-            task = f"{task['priority']} {task['title']} (Due: {task['due_date']}, Category: {task['category']}, Status: {task['status']})"
-            print(task)
+        self.display_tasks(sorted_tasks)
 
     def load(self):
         """Load tasks from a file."""
