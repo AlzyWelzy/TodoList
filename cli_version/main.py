@@ -144,6 +144,7 @@ class TodoList:
         sys.exit(0)
 
     def run(self):
+        os.system("clear")
         self.load()
         print("Welcome to the Task Manager!")
         print("Commands:")
