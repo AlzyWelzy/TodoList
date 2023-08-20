@@ -1,8 +1,11 @@
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 import pathlib
+from plyer import notification
+import schedule
+import threading
 
 
 class TodoList:
@@ -10,6 +13,7 @@ class TodoList:
         self.tasks = {}
 
         self.commands = {
+            "schedule": ("schedule reminders", self.remind),
             "add": ("add a task", self.add),
             "update": ("update a task", self.update),
             "list": ("display tasks", self.list),
@@ -26,6 +30,17 @@ class TodoList:
         }
 
         self.FILEPATH = pathlib.Path("tasks.json")
+
+        self.load()
+
+        # Start a seperate thread to run the scheduled tasks
+        self.schedule_thread = threading.Thread(target=self.remind)
+        self.schedule_thread.daemon = True
+        self.schedule_thread.start()
+
+        # Schedule the daily reminder
+        # Inside the __init__ method
+        schedule.every().day.at("11:20").do(self.remind_wrapper)
 
     def get_valid_date_input(self, prompt):
         while True:
@@ -44,24 +59,70 @@ class TodoList:
             else:
                 print("Invalid priority")
 
-    def format_task_line(index, task):
-        return "{:<5} {:<10} {:<20} {:<15} {:<15} {:<15}".format(
+    def get_valid_scheduled_input(self, prompt, choices, func=None):
+        user_input = input(prompt)
+        if user_input in choices:
+            func(user_input) if func else None
+            return user_input
+        else:
+            print("Invalid input")
+            return self.get_valid_scheduled_input(prompt, choices)
+
+    def notify(self, title, message):
+        notification.notify(
+            title=title,
+            message=message,
+            app_name="Task Manager",
+            timeout=5,
+        )
+
+    def remind(self, scheduled, due_date):
+        if scheduled == "Y":
+            today = datetime.today().date()
+            task_due_date = datetime.strptime(due_date, "%Y-%m-%d").date()
+
+            if task_due_date == today:
+                self.notify(
+                    "Task Due Today", f"Task with due date {due_date} is due today."
+                )
+            elif task_due_date == today + timedelta(days=1):
+                self.notify(
+                    "Task Due Tomorrow",
+                    f"Task with due date {due_date} is due tomorrow.",
+                )
+
+    def remind_wrapper(self):
+        for task in self.tasks.values():
+            if task["scheduled"] == "Y":
+                self.remind(task["scheduled"], task["due_date"])
+
+    def format_task_line(self, index, task):
+        return "{:<5} {:<10} {:<20} {:<20} {:<15} {:<15} {:<15} {:<15}".format(
             index,
             task["priority"],
             task["title"],
+            task["description"],
             task["due_date"],
             task["category"],
             task["status"],
+            task["scheduled"],
         )
 
     def display_tasks(self, tasks):
         """Display tasks in a formatted table."""
         print(
-            "{:<5} {:<10} {:<20} {:<15} {:<15} {:<15}".format(
-                "No.", "Priority", "Title", "Due Date", "Category", "Status"
+            "{:<5} {:<10} {:<20} {:<20} {:<15} {:<15} {:<15} {:<15}".format(
+                "No.",
+                "Priority",
+                "Title",
+                "Description",
+                "Due Date",
+                "Category",
+                "Status",
+                "Scheduled",
             )
         )
-        print("-" * 80)
+        print("-" * 125)
 
         for index, task in enumerate(tasks, start=1):
             task_line = self.format_task_line(index, task)
@@ -72,11 +133,21 @@ class TodoList:
         print("Adding task")
         task = {}
         task["title"] = input("Enter task name: ")
+        task["description"] = input("Enter task description: ")
         task["priority"] = self.get_valid_priority_input("Enter priority (L/M/H): ")
         task["due_date"] = self.get_valid_date_input("Enter due date (YYYY-MM-DD): ")
         task["category"] = input("Enter category: ")
         task["status"] = "incomplete"
+        task["scheduled"] = self.get_valid_scheduled_input(
+            "Schedule task? (Y/N): ",
+            ["Y", "N"],
+        )
+
         self.tasks[task["title"]] = task
+        if task["scheduled"] == "Y":
+            schedule.every().day.at("10:00").do(
+                self.remind, task["scheduled"], task["due_date"]
+            )
         print("Task added")
 
     def list(self):
@@ -162,11 +233,17 @@ class TodoList:
     def load(self):
         """Load tasks from a file."""
         print("Loading tasks")
-        try:
-            with open(self.FILEPATH, "r") as read_file:
-                self.tasks = json.load(read_file)
-        except FileNotFoundError:
-            print("File not found")
+        if not self.FILEPATH.exists():
+            print("No tasks found")
+            return
+
+        #  check if file is empty
+        if os.stat(self.FILEPATH).st_size == 0:
+            print("No tasks found")
+            return
+
+        with open(self.FILEPATH, "r") as read_file:
+            self.tasks = json.load(read_file)
 
     def save(self):
         """Save tasks to a file."""
@@ -183,7 +260,7 @@ class TodoList:
     def run(self):
         os.system("clear")
         print("Welcome to the Task Manager!")
-        self.load()
+        # self.load()
         print("")
         print("Commands:")
 
@@ -192,7 +269,10 @@ class TodoList:
 
         print("")
 
+        # schedule.every().day.at("10:").do(self.remind)
+
         while True:
+            schedule.run_pending()
             command = input("Enter a command: ").strip().lower()
             if command not in self.commands:
                 print("Invalid command")

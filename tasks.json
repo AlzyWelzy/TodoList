@@ -1,1 +1,11 @@
-{"Get a job": {"title": "Get a job", "priority": "H", "due_date": "2023-12-31", "category": "Personal", "status": "incomplete"}}
+{
+  "Get an internship": {
+    "title": "Get an internship",
+    "description": "get a life",
+    "priority": "H",
+    "due_date": "2023-08-23",
+    "category": "personal",
+    "status": "incomplete",
+    "scheduled": "Y"
+  }
+}
