@@ -64,7 +64,7 @@ class TodoList:
         print("-" * 80)
 
         for index, task in enumerate(tasks, start=1):
-            task_line = format_task_line(index, task)
+            task_line = self.format_task_line(index, task)
             print(task_line)
 
     def add(self):
@@ -127,7 +127,7 @@ class TodoList:
         filter_type = input("Enter filter type (priority, due date, category): ")
         filter_value = input("Enter filter value (eg. [L/M/H] for priority filter): ")
 
-        filtered_tasks = {}
+        filtered_tasks = []
         for task in self.tasks.values():
             if task[filter_type] == filter_value:
                 filtered_tasks.append(task)
@@ -143,15 +143,15 @@ class TodoList:
         sorted_tasks = {}
         if sort_type == "priority":
             sorted_tasks = sorted(
-                self.tasks.items(), key=lambda x: x[1]["priority"], reverse=True
+                self.tasks.values(), key=lambda x: x["priority"], reverse=True
             )
         elif sort_type == "due date":
             sorted_tasks = sorted(
-                self.tasks.items(), key=lambda x: x[1]["due_date"], reverse=True
+                self.tasks.values(), key=lambda x: x["due_date"], reverse=True
             )
         elif sort_type == "status":
             sorted_tasks = sorted(
-                self.tasks.items(), key=lambda x: x[1]["status"], reverse=True
+                self.tasks.values(), key=lambda x: x["status"], reverse=True
             )
         else:
             print("Invalid sort type")
@@ -182,8 +182,9 @@ class TodoList:
 
     def run(self):
         os.system("clear")
-        self.load()
         print("Welcome to the Task Manager!")
+        self.load()
+        print("")
         print("Commands:")
 
         for command, (description, _) in self.commands.items():
