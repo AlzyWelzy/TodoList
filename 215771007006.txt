@@ -1,0 +1,20 @@
+Name: Manvendra Rajpoot
+Civil Status: Singli
+Gender: Male
+Birthdate: 2002-07-14
+Age: 21
+Birthplace: Jhansi
+Birth Country: India
+Street, Barangay: Pichhor
+Municipality, Province: Medical
+Mobile Number: 9452277560
+Email Address: manvendra.raj.2002@gmail.com
+Nationality: Indian
+Is Working-Student?: Yes
+Course: BCA
+Name of the last school attended: GIC
+Guardian's Name: Ravikant Singh Rajpoot
+Are you a new student?: No
+Are you a shifter?: no
+Are you a transferee?: Yeah
+Do you love programming so far?: Yes
