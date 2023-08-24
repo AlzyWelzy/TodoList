@@ -4,5 +4,6 @@
 
 
 with open("file.txt", "r") as file:
-    print(file.read())
-    print(len(file.read()))
+    str = file.read()
+    print(str)
+    print(len(str))
