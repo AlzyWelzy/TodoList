@@ -1,13 +1,18 @@
-# length = float(input("Enter length: "))
-# width = float(input("Enter width: "))
+# ids = ["XF345_89", "XER76849", "XA454_55"]
 
-# perimeter = (length + width) * 2
-# area = length * width
+# x = 0
 
-# print("Perimeter is", perimeter)
-# print("Area is", area)
+# for id in ids:
+#     if '_' in id:
+#         x = x + 1
+#     print(x)
 
-# if perimeter < 14 and area > 10:
-#     print("OK")
-# else:
-#     print("NOT OK")
+
+ids = ["XF345_89", "XER76849", "XA454_55"]
+
+x = 0
+
+for id in ids:
+    if "_" in id:
+        x = x + 1
+    print(x)
