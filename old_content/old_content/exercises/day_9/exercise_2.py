@@ -15,5 +15,4 @@ x = 0
 for id in ids:
     if "_" in id:
         x = x + 1
-        x = x + 1
 print(x)
