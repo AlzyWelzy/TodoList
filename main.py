@@ -39,7 +39,6 @@ class TodoList:
         self.schedule_thread.start()
 
         # Schedule the daily reminder
-        # Inside the __init__ method
         schedule.every().day.at("10:00").do(self.remind_wrapper)
 
     def get_valid_date_input(self, prompt):
