@@ -257,7 +257,6 @@ class TodoList:
     def run(self):
         os.system("clear")
         print("Welcome to the Task Manager!")
-        # self.load()
         print("")
         print("Commands:")
 
