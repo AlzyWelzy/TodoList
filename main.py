@@ -266,8 +266,6 @@ class TodoList:
 
         print("")
 
-        # schedule.every().day.at("10:").do(self.remind)
-
         while True:
             schedule.run_pending()
             command = input("Enter a command: ").strip().lower()
