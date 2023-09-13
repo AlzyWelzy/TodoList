@@ -8,7 +8,7 @@ This is a simple Todo App built using Streamlit. The app allows you to manage yo
 
 - **Mark Todos as Completed:** You can mark a task as completed by clicking the checkbox next to it. The completed tasks will be crossed out for easy identification.
 
-- **Delete Completed Todos:** If you no longer need a completed task, you can click the checkbox again to unmark it, and then click the "Delete" button to remove it from your list.
+- **Delete Completed Todos:** If you wish to remove completed tasks from the list, you can do so by checking the checkbox for the completed task. It will disappear from the list.
 
 ## How to Use
 
