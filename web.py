@@ -1,11 +1,15 @@
 import streamlit as st
 import functions
 
+# Initialize session state variables
+if "new_todo" not in st.session_state:
+    st.session_state.new_todo = ""
+
 todos = functions.get_todos()
 
 
 def add_todo():
-    todo = st.session_state["new_todo"] + "\n"
+    todo = st.session_state.new_todo + "\n"
     todos.append(todo)
     functions.write_todos(todos)
 
