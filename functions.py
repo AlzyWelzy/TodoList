@@ -6,7 +6,7 @@ def get_todos(filepath=FILEPATH):
     to-do items.
     """
     with open(filepath, "r") as file_local:
-        todos_local = [line.strip() for line in file_local.readlines()]
+        todos_local = file_local.readlines()
     return todos_local
 
 
