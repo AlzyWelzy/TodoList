@@ -16,7 +16,7 @@ This is a simple Todo App built using Streamlit. The app allows you to manage yo
 
 2. **Mark as Completed:** To mark a task as completed, click the checkbox next to it. The task will be crossed out to indicate completion.
 
-3. **Delete a Todo:** To delete a completed task, uncheck the checkbox next to it, and then click the "Delete" button.
+3. **Delete a Completed Todo:** If you want to remove a completed task from the list, check the checkbox for that task. It will then disappear from the list.
 
 ## Installation and Setup
 
