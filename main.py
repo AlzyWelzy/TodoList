@@ -44,3 +44,11 @@ for index, todo in enumerate(todos):
 st.text_input(
     label="", placeholder="Add new todo...", on_change=add_todo, key="new_todo"
 )
+
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
